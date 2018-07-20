@@ -1,17 +1,10 @@
 package ro;
 
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 import java.util.*;
 
-@Component
 public class DemoList {
-    @Resource(name = "mapa")
     private Map<String, Object> map;
-    @Resource(name = "lista")
     private List list;
-    @Resource(name = "propsa")
     private Properties props;
 
     public void showAll(){

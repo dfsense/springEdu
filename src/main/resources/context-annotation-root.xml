@@ -6,15 +6,11 @@
          xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:component-scan base-package="ro"/>
-    <util:map id="mapa" map-class="java.util.HashMap">
-        <entry key="id test mapa">
-            <value>test mapa</value>
-        </entry>
-    </util:map>
-    <util:list id="lista" list-class="java.util.ArrayList">
-        <value>Test lista</value>
-    </util:list>
-    <util:properties id="propsa">
-        <prop key="Prop1">Test Props</prop>
-    </util:properties>
+    <bean class="ro.MyHelper" name="helper" scope="prototype"/>
+    <bean class="factory.StandartDemoBean" name="standartDemoBean">
+        <property ref="helper" name="myHelper"/>
+    </bean>
+    <bean name="abstractDemoBean" class="factory.AbstractDemoBean">
+        <lookup-method name="getMyHelper" bean="helper"/>
+    </bean>
 </beans>

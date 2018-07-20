@@ -1,13 +1,9 @@
 package main;
 
-import factory.FactoryObj;
-import interfaces.IProvider;
-import interfaces.IRender;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
+
+import interfaces.DemoBean;
 import org.springframework.context.support.GenericXmlApplicationContext;
-import ro.DemoList;
+import ro.MyHelper;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,7 +11,19 @@ public class Main {
         rootContext.load("classpath:context-annotation-root.xml");
         rootContext.refresh();
 
-        DemoList demo = (DemoList) rootContext.getBean("demoList");
-        demo.showAll();
+        DemoBean standartDemoBean1 = (DemoBean) rootContext.getBean("standartDemoBean");
+        DemoBean standartDemoBean2 = (DemoBean) rootContext.getBean("standartDemoBean");
+        DemoBean abstractDemoBean = (DemoBean) rootContext.getBean("abstractDemoBean");
+        System.out.println("sdb1.helper == sdb2.helper " + (standartDemoBean1.getMyHelper() == standartDemoBean2.getMyHelper()));
+
+        test(standartDemoBean1);
+        test(standartDemoBean2);
+        test(abstractDemoBean);
+    }
+
+    static public void test(DemoBean demoBean){
+        MyHelper helper1 = demoBean.getMyHelper();
+        MyHelper helper2 = demoBean.getMyHelper();
+        System.out.println("helper1 == helper2 : " + (helper1 == helper2));
     }
 }
